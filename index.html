@@ -4,6 +4,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#542d1b">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="متزن">
+<link rel="apple-touch-icon" href="icon-192.png">
 <title>متزن | قائمة القهوة</title>
 <style>
 :root{--brown:#542d1b;--brown2:#6a3a24;--cream:#f7f0e6;--paper:#fffaf4;--ink:#241812;--muted:#806f64;--line:#eadbcd;--accent:#b76838}
@@ -219,4 +224,9 @@ function total(){return cart.reduce((a,x)=>a+x.price*x.qty,0)}function fmt(n){re
 const panel=document.getElementById('cartPanel');document.getElementById('cartFab').onclick=()=>panel.classList.add('open');document.getElementById('closeCart').onclick=()=>panel.classList.remove('open');panel.addEventListener('click',e=>{if(e.target===panel)panel.classList.remove('open')});
 document.getElementById('sendWhatsApp').onclick=()=>{const name=document.getElementById('customerName').value.trim();if(!name){alert('اكتب اسمك أولاً');return}if(!cart.length){alert('أضف منتج واحد على الأقل للسلة');return}let lines=[`طلب جديد من متزن ☕️`,`الاسم: ${name}`,'','تفاصيل الطلب:'];cart.forEach(x=>lines.push(`• ${x.name}${x.size!=='عادي'?' — '+x.size:''} × ${x.qty} = ${fmt(x.price*x.qty)} ريال سعودي`));lines.push('',`الإجمالي النهائي: ${fmt(total())} ريال سعودي`);window.location.href=`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(lines.join('\n'))}`};
 function showToast(){const t=document.getElementById('toast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1100)}renderCart();
-</script></body></html>
+</script><script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
+}
+</script>
+</body></html>
