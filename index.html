@@ -226,7 +226,7 @@ document.getElementById('sendWhatsApp').onclick=()=>{const name=document.getElem
 function showToast(){const t=document.getElementById('toast');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),1100)}renderCart();
 </script><script>
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => navigator.serviceWorker.register('./عامل-الخدمة.js'));
+  window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js'));
 }
 </script>
 </body></html>
